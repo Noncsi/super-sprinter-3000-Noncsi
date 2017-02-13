@@ -1,0 +1,48 @@
+{% extends "layout.html" %} {% block body %} {% if entry %}
+<form action="{{ url_for('update_story') }}" method=post class=edit_story>
+  <dl>
+    <h1>Edit Story</h1>
+    <dd><label for="story_title">Story Title</label>
+      <dd><input type=text size=60 name=story_title id=story_title value="{{ entry.story_title }}">
+        <dd><label for="user_story">User Story</label>
+          <dd><textarea name=user_story rows=5 cols=60 id=user_story>{{ entry.user_story }}</textarea>
+            <dd><label for="acceptance_criteria">Acceptance Criteria</label>
+              <dd><textarea name=acceptance_criteria rows=5 cols=60 id=acceptance_criteria>{{ entry.acceptance_criteria }}</textarea>
+                <dd><label for="business_value">Business Value</label>
+                  <dd><input name=business_value type=number min=100 max=1500 step=100 id=business_value value="{{ entry.business_value }}">
+                    <dd><label for="estimation_time">Estimation Time</label>
+                      <dd><input name=estimation_time type=number min=0.5 step=0.5 max=40 id=estimation_time value="{{ entry.estimation_time }}">
+                        <dd><label for="status">Status</label>
+                          <dd><select name=status id=status value="{{ entry.status }}">
+                              <option value="planning">Planning</option>
+                              <option value="to do">To Do</option>
+                              <option value="in progress">In Progress</option>
+                              <option value="review">Review</option>
+                              <option value="done">Done</option>
+                              </select>
+                            <dd><input type="submit" value="Update" id=update_button>
+  </dl>
+</form>
+{% else %}
+<form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+  <dl>
+    <h1>Add new Story</h1>
+    <dd><label for="story_title">Story Title</label>
+      <dd><input type=text size=60 name=story_title id=story_title>
+        <dd><label for="user_story">User Story</label>
+          <dd><textarea name=user_story rows=5 cols=60 id=user_story></textarea>
+            <dd><label for="acceptance_criteria">Acceptance Criteria</label>
+              <dd><textarea name=acceptance_criteria rows=5 cols=60 id=acceptance_criteria></textarea>
+                <dd><label for="business_value">Business Value</label>
+                  <dd><input name=business_value type=number min=100 max=1500 step=100 id=business_value>
+                    <dd><label for="estimation_time">Estimation Time</label>
+                      <dd><input name=estimation_time type=number min=0.5 max=40 step=0.5 id=estimation_time>
+                        <dd><label for="status">Status</label>
+                          <dd><select name=status id=status> 
+                              <option value="planning">Planning</option>
+                              <option value="to do">To Do</option>
+                              <option value="in progress">In Progress</option>
+                              <option value="review">Review</option>
+                              <option value="done">Done</option>
+                              </select>
+                            <dd><input type="submit" value="Create" id=create_button>{% endif %} {% endblock %}
