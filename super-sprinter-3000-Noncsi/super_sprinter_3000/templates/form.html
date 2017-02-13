@@ -1,5 +1,5 @@
 {% extends "layout.html" %} {% block body %} {% if entry %}
-<form action="{{ url_for('update_story') }}" method=post class=edit_story>
+<form action="{{ url_for('update_story', story_id=entry.id) }}" method=post class=edit_story>
   <dl>
     <h1>Edit Story</h1>
     <dd><label for="story_title">Story Title</label>

@@ -60,17 +60,25 @@ def add_entry():
 
 @app.route('/story/<story_id>')
 def edit_story(story_id):
-    entry = Entries.select().where(Entries.id == story_id)
+    entry = Entries.select().where(Entries.id == story_id).get()
     return render_template('form.html', entry=entry)
 
 
-@app.route('/story/edit/', methods=['POST'])
-def update_story():
-    update_entry = Entries.update(story_title=request.form["story_title"],
-                                  user_story=request.form["user_story"],
-                                  acceptance_criteria=request.form["acceptance_criteria"],
-                                  business_value=request.form["business_value"],
-                                  estimation_time=request.form["estimation_time"],
-                                  status=request.form["status"])
-    update_entry.execute()
-    return redirect(url_for('list_story',))
+@app.route('/story/edit/<story_id>', methods=['POST'])
+def update_story(story_id):
+    entry = Entries.select().where(Entries.id == story_id).get()
+    entry.story_title = request.form["story_title"]
+    entry.user_story = request.form["user_story"]
+    entry.acceptance_criteria = request.form["acceptance_criteria"]
+    entry.business_value = request.form["business_value"]
+    entry.estimation_time = request.form["estimation_time"]
+    entry.status = request.form["status"]
+    entry.save()
+    return redirect(url_for('list_story'))
+
+
+@app.route('/story/delete/<story_id>')
+def delete_story(story_id):
+    delete_entry = Entries.delete().where(Entries.id == story_id)
+    delete_entry.execute()
+    return redirect(url_for('list_story'))
