@@ -1,34 +1,35 @@
 {% extends "layout.html" %} {% block body %}
-<a href="{{ url_for('show_story') }}"></p>
-    <i class="fa fa-plus" style="font-size:24px;"></i></a>
-<table>
-    <th>Story ID</th>
-    <th>Story Title</th>
-    <th>User Story</th>
-    <th>Acceptance Criteria</th>
-    <th>Business Value</th>
-    <th>Estimation Time</th>
-    <th>Status</th>
-    <th>Edit</th>
-    <th>Delete</th>
-    {% for entry in entries %}
-    <tr>
-        <td>{{ entry.id }}</td>
-        <td>{{ entry.story_title }}</td>
-        <td>{{ entry.user_story }}</td>
-        <td>{{ entry.acceptance_criteria }}</td>
-        <td>{{ entry.business_value }}</td>
-        <td>{{ entry.estimation_time }}</td>
-        <td>{{ entry.status }}</td>
-        <td>
-            <a href="{{ url_for('edit_story', story_id=entry.id) }}"></p>
-                <i class="fa fa-pencil" style="font-size:24px;"></i></a>
-        </td>
-        <td>
-            <a href="{{ url_for('delete_story', story_id=entry.id) }}"></p>
-                <i class="fa fa-trash" style="font-size:24px;"></i></a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+<div class="panel panel-default">
+
+    <!-- Table -->
+    <table class="table">
+        <th>Story ID</th>
+        <th>Story Title</th>
+        <th>User Story</th>
+        <th>Acceptance Criteria</th>
+        <th>Business Value</th>
+        <th>Estimation Time</th>
+        <th>Status</th>
+        {% for entry in entries %}
+        <tr>
+            <td>{{ entry.id }}</td>
+            <td>{{ entry.story_title }}</td>
+            <td>{{ entry.user_story }}</td>
+            <td>{{ entry.acceptance_criteria }}</td>
+            <td>{{ entry.business_value }}</td>
+            <td>{{ entry.estimation_time }}</td>
+            <td>{{ entry.status }}</td>
+            <td>
+                <a href="{{ url_for('edit_story', story_id=entry.id) }}"></p>
+                    <i data-toggle="tooltip" title="Edit" class=" fa fa-pencil " style="font-size:24px; "></i>
+                </a>
+            </td>
+            <td>
+                <a href="{{ url_for( 'delete_story', story_id=entry.id) }} "></p>
+                    <i data-toggle="tooltip" title="Delete" class="fa fa-trash " style="font-size:24px; "></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}
